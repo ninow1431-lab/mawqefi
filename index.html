@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تطبيق المواقف الذكية - نموذج تفاعلي</title>
+<style>
+:root{--bg:#f6ebe6;--card:#fffaf7;--p:#7a4a4a;--p2:#a86f6f;--line:#e4d2cb;--tx:#3d2626;--mut:#8c6f6a;--ok:#dcebd8;--okt:#2f7a3a;--g:#2f7a3a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#2a1f1f;--card:#382a2a;--p:#c58b8b;--p2:#d9a5a5;--line:#4d3a3a;--tx:#f5e9e4;--mut:#bfa39e;--ok:#2f4a2c;--okt:#bfe3b9}}
+*{box-sizing:border-box;margin:0;font-family:"Segoe UI",Tahoma,"Noto Sans Arabic",sans-serif;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#d9c5be;color:var(--tx)}
+body{display:flex;align-items:center;justify-content:center}
+#phone{width:390px;height:800px;max-width:100%;max-height:100%;background:var(--bg);border-radius:32px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 10px 40px #0004}
+@media(max-width:430px){#phone{border-radius:0;height:100%}}
+#app{flex:1;overflow-y:auto;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px)}
+.pad{padding:16px;flex:1}
+h1{font-size:24px}h2{font-size:17px}.mut{color:var(--mut);font-size:13px}.center{text-align:center}
+.top{display:flex;align-items:center;gap:10px;padding:16px 16px 8px;font-weight:700;font-size:18px}
+.back{background:none;border:0;font-size:24px;color:var(--tx);cursor:pointer}
+.btn{display:block;width:100%;padding:14px;border-radius:14px;border:1px solid var(--p);background:var(--p);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:14px;text-align:center}
+.btn.o{background:none;color:var(--p)}
+input[type=text],input[type=tel],input[type=password],input[type=email]{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--tx);font-size:15px;margin-top:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px}
+.row{display:flex;align-items:center;gap:12px;cursor:pointer}.sp{flex:1}
+.tag{padding:3px 10px;border-radius:10px;font-size:12px;background:var(--ok);color:var(--okt)}
+.pbadge{width:46px;height:46px;border-radius:50%;background:var(--g);color:#fff;font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center}
+.sign{width:96px;height:110px;margin:10px auto;font-size:80px;line-height:110px}
+.nav{display:flex;border-top:1px solid var(--line);background:var(--card);padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px))}
+.nav div{flex:1;text-align:center;font-size:11px;color:var(--mut);cursor:pointer}
+.nav div span{display:block;font-size:20px}.nav .on{color:var(--p);font-weight:700}
+.map{position:relative;flex:1;min-height:320px;overflow:hidden;background:linear-gradient(var(--line) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,var(--line) 1px,transparent 1px) 0 0/44px 44px,var(--bg)}
+.pin{position:absolute;width:32px;height:32px;border-radius:50% 50% 50% 0;transform:translate(-50%,-100%) rotate(-45deg);background:var(--g);cursor:pointer}
+.pin b{display:block;transform:rotate(45deg);color:#fff;text-align:center;line-height:32px;font-size:15px}
+.me{position:absolute;width:18px;height:18px;border-radius:50%;background:#3b82f6;border:3px solid #fff;box-shadow:0 0 0 8px #3b82f633}
+.fab{position:absolute;left:12px;width:38px;height:38px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px #0002}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.tiles div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 4px;text-align:center;font-size:12px;cursor:pointer}
+.tiles span{display:block;font-size:28px;margin-bottom:4px}
+.hero{height:170px;margin:0 16px;border-radius:14px;background:linear-gradient(135deg,#9db4c0,#6a7f8a 50%,#b99a94);display:flex;align-items:center;justify-content:center;font-size:64px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:12px}
+.grid3 div{font-size:12px;color:var(--mut)}.grid3 b{display:block;font-size:16px;color:var(--tx);margin-top:4px}
+.sw{display:flex;margin-top:6px;background:var(--card);border-radius:12px;padding:4px}
+.sw div{flex:1;text-align:center;padding:9px;border-radius:9px;cursor:pointer}.sw .on{background:var(--p);color:#fff}
+.hero2{background:linear-gradient(160deg,#dfeadb,var(--card));border-radius:18px;padding:16px;margin-top:10px}
+.sheet{background:var(--card);padding:14px 16px 18px;border-radius:20px 20px 0 0;box-shadow:0 -4px 14px #0001}
+.timer{font-size:40px;font-weight:700;margin:8px 0;font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div id="phone"><div id="app"></div></div>
+<script>
+const spots=[
+{n:"موقف مجمع الورد",d:"350 م",p:2,t:"مغطى",cap:120,x:62,y:30},
+{n:"موقف الكورنيش",d:"800 م",p:3,t:"مكشوف",cap:80,x:25,y:60}];
+const hist=[["موقف مجمع الورد","12 مايو 2025","ساعة 1"],["موقف الكورنيش","10 مايو 2025","3 ساعات"],["موقف الأندلس مول","5 مايو 2025","ساعتان"],["موقف الجامعة","1 مايو 2025","ساعة 1"]];
+const st={cur:0,tab:"السجل",hist:[],sec:5003,tm:null};
+const $=document.getElementById("app");
+const nb=a=>`<div class="nav">${[["home","🏠","الرئيسية"],["map","🗺️","الخريطة"],["history","📍","المواقف"],["more","⋯","مزيد"]].map(x=>`<div class="${a==x[0]?"on":""}" data-go="${x[0]}"><span>${x[1]}</span>${x[2]}</div>`).join("")}</div>`;
+const hdr=(t,b=1)=>`<div class="top">${b?`<button class="back" data-back>›</button>`:""}<span>${t}</span></div>`;
+const pins=()=>spots.map((s,i)=>`<div class="pin" style="left:${s.x}%;top:${s.y}%" data-spot="${i}"><b>P</b></div>`).join("");
+const spotCard=(s,i)=>`<div class="card row" data-spot="${i}"><div class="sp"><b>${s.n}</b><div class="mut">على بعد ${s.d}</div></div><span class="tag">● متاح</span><span>‹</span></div>`;
+const S={
+welcome:()=>`<div class="pad center" style="display:flex;flex-direction:column;justify-content:center"><div class="sign">🅿️</div><h1 style="color:var(--p);margin-top:20px">تطبيق المواقف الذكية</h1><p class="mut" style="font-size:16px;margin-top:8px">موقفك .. أسهل وأسرع</p><button class="btn" style="margin-top:40px" data-go="signup">ابدأ الآن</button><p class="mut" style="margin-top:14px">لديك حساب؟ <u data-go="login" style="cursor:pointer">تسجيل الدخول</u></p></div>`,
+signup:()=>`${hdr("")}<div class="pad center" style="padding-top:0"><h1>إنشاء حساب</h1><p class="mut">أدخل بياناتك للبدء</p><input type="text" placeholder="الاسم الكامل"><input type="tel" placeholder="رقم الجوال"><input type="email" placeholder="البريد الإلكتروني (اختياري)"><input type="password" placeholder="كلمة المرور"><button class="btn" data-go="home">إنشاء حساب</button><p class="mut" style="margin:14px">أو</p><button class="btn o" style="margin-top:0" data-go="login">تسجيل الدخول</button></div>`,
+login:()=>`<div class="pad center"><div class="sign" style="margin-top:20px">🅿️</div><h1 style="margin-top:10px">تطبيق المواقف الذكية</h1><p class="mut">موقفك .. أسهل وأسرع</p><input type="text" placeholder="رقم الجوال / البريد الإلكتروني"><input type="password" placeholder="كلمة المرور"><p class="mut" style="text-align:right;margin-top:10px">نسيت كلمة المرور؟</p><button class="btn" data-go="home">تسجيل الدخول</button><p class="mut" style="margin-top:14px">ليس لديك حساب؟ <u data-go="signup" style="cursor:pointer">إنشاء حساب</u></p></div>`,
+home:()=>`<div class="pad"><div class="row" style="justify-content:space-between;margin-top:6px"><b style="font-size:20px">مرحبا</b><span class="pbadge" style="background:var(--p);width:38px;height:38px;font-size:18px" data-go="more">👤</span></div><div class="hero2"><h2>ابحث عن موقفك الآن</h2><input type="text" placeholder="🔍 أدخل موقفك أو الوجهة ..." style="border-radius:20px"></div><div class="tiles"><div data-go="map"><span>🅿️</span>المواقف القريبة</div><div data-go="map"><span>📍</span>على الخريطة</div><div data-go="history"><span>🕘</span>سجل مواقفك</div></div><h2 style="margin-top:18px">مواقف قريبة منك</h2>${spots.map(spotCard).join("")}</div>${nb("home")}`,
+map:()=>`<div style="display:flex;flex-direction:column;flex:1">${hdr("المواقف القريبة",0)}<div class="map"><div class="me" style="left:50%;top:55%"></div>${pins()}<div class="fab" style="top:90px">◎</div><div class="fab" style="top:136px">➤</div></div><div style="padding:0 16px 10px">${spots.map(spotCard).join("")}</div></div>${nb("map")}`,
+details:()=>{const s=spots[st.cur];return`${hdr("تفاصيل الموقف")}<div class="hero">🅿️🚗</div><div class="pad"><h2 style="font-size:21px">${s.n}</h2><div class="mut">على بعد ${s.d}</div><div style="margin-top:10px"><span class="tag">● متاح</span></div><div class="grid3"><div>نوع الموقف<b>${s.t}</b></div><div>عدد الأماكن<b>${s.cap}</b></div><div>سعر الساعة<b>${s.p} ريال</b></div></div><button class="btn" data-go="route">الاتجاهات ➤</button></div>`},
+route:()=>{const s=spots[st.cur];return`<div style="display:flex;flex-direction:column;flex:1">${hdr("المسار إلى الموقف")}<div class="map"><svg viewBox="0 0 100 100" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%"><path d="M30 88 C30 60 62 70 58 45 S66 25 66 18" fill="none" stroke="#3b82f6" stroke-width="1.6" vector-effect="non-scaling-stroke" style="stroke-width:5px;stroke-linecap:round"/></svg><div class="pin" style="left:66%;top:18%"><b>P</b></div><div style="position:absolute;left:30%;top:88%;font-size:28px;transform:translate(-50%,-50%)">🚗</div></div><div class="sheet"><div class="row" style="justify-content:space-between"><span data-back style="cursor:pointer">✕</span><div style="text-align:right"><b>${s.n}</b><div class="mut">على بعد ${s.d}</div></div></div><button class="btn" data-go="active">بدء التوجيه</button></div></div>`},
+active:()=>{const s=spots[st.cur];return`${hdr("الموقف النشط")}<div class="pad"><div class="card center"><div style="font-size:44px">🕒</div><b style="font-size:18px">موقفك قيد الاستخدام</b><div class="timer" id="tm">--:--:--</div><div class="mut">الوقت المنقضي</div></div><div class="card"><div class="row"><div class="sp mut">موقع الموقف<br><b style="color:var(--tx)">${s.n}</b></div><span style="font-size:22px">📍</span></div><hr style="border:0;border-top:1px solid var(--line);margin:10px 0"><div class="row"><div class="sp mut">رقم المكان<br><b style="color:var(--tx);font-size:18px">A12</b></div><span style="font-size:22px">🚗</span></div></div><button class="btn" data-go="history">إنهاء الموقف</button></div>`},
+history:()=>`${hdr("سجل مواقفك",0)}<div class="pad" style="padding-top:0"><div class="sw">${["السجل","المفضلة"].map(t=>`<div class="${st.tab==t?"on":""}" data-tab="${t}">${t}</div>`).join("")}</div>${(st.tab=="السجل"?hist:hist.slice(0,2)).map(h=>`<div class="card row"><div class="pbadge">P</div><div class="sp"><b>${h[0]}</b><div class="mut">${h[1]}<br>${h[2]}</div></div><span>‹</span></div>`).join("")}</div>${nb("history")}`,
+more:()=>`${hdr("مزيد",0)}<div class="pad" style="padding-top:0"><div class="row"><div class="pbadge" style="background:var(--p);width:56px;height:56px">👤</div><div><b>لورين النعيمي</b><div class="mut" dir="ltr">l***@gmail.com</div></div></div>${[["الإعدادات","⚙️"],["الإشعارات","🔔"],["المساعدة والدعم","❓"],["عن التطبيق","ℹ️"]].map(x=>`<div class="card row"><span class="sp">${x[0]}</span>${x[1]}</div>`).join("")}<div class="card row" data-go="welcome" style="color:#c0392b"><span class="sp">تسجيل الخروج</span>⎋</div></div>${nb("more")}`
+};
+function go(id,back){clearInterval(st.tm);if(!back&&st.id&&st.id!=id)st.hist.push(st.id);st.id=id;$.innerHTML=S[id]();$.scrollTop=0;
+if(id=="active"){const f=()=>{const e=document.getElementById("tm");if(!e)return;const v=st.sec++,p=n=>String(n).padStart(2,"0");e.textContent=`${p(v/3600|0)}:${p(v%3600/60|0)}:${p(v%60)}`};f();st.tm=setInterval(f,1000)}}
+$.addEventListener("click",e=>{const t=e.target.closest("[data-go],[data-back],[data-spot],[data-tab]");if(!t)return;const d=t.dataset;
+if("back" in d)return go(st.hist.pop()||"home",1);
+if(d.spot!==undefined){st.cur=+d.spot;return go("details")}
+if(d.tab){st.tab=d.tab;return go(st.id,1)}
+go(d.go)});
+go("welcome");
+</script>
+</body>
+</html>
